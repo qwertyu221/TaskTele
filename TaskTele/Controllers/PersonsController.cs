@@ -24,8 +24,7 @@ namespace TaskTele.Controllers
 
         [Route("Persons/List")]
         [Route("Persons/List/{sex}")] // передается пол
-        [Route("Persons/List/{sex}/{x}/{y}")]
-        [Route("Persons/List/{sex}/{x}/{y}/{page}")]// необходима дополнительная проверка на ввод числа или обернуть в try catch
+        [Route("Persons/List/{sex}/{x}/{y}")]// необходима дополнительная проверка на ввод числа или обернуть в try catch
         public ActionResult List (string sex, string x, string y) {
 
             List<Person> person = null;
