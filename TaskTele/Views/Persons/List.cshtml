@@ -1,0 +1,32 @@
+﻿@using TaskTele.Data.Models 
+@model IEnumerable<Person>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <h2>Жители</h2>
+    @{ 
+        foreach (var person in Model){
+            string mOrf = "";
+            if (person.sex == true) {
+                mOrf = "male";
+            } else {
+                mOrf = "female";
+            }
+        <div>
+            <h5>Id : @person.id </h5>
+            <h5>Имя : @person.name </h5>
+            <h6>Пол : @mOrf </h6>
+        </div>
+            }
+    }
+</body>
+</html>
