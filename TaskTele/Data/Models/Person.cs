@@ -14,5 +14,6 @@ namespace TaskTele.Data.Models
         public int age { get; set; }
 
         public bool sex { get; set; }
+
     }
 }

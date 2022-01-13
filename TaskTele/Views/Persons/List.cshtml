@@ -1,5 +1,8 @@
-﻿@using TaskTele.Data.Models 
-@model IEnumerable<Person>
+﻿@*@using TaskTele.Data.Models
+    @model IEnumerable<Person>*@
+
+@using TaskTele.Data.Models
+@model IndexViewModel
 @{
     Layout = null;
 }
@@ -13,20 +16,36 @@
 </head>
 <body>
     <h2>Жители</h2>
-    @{ 
-        foreach (var person in Model){
+    @{
+        foreach (var person in Model.Persons) {
             string mOrf = "";
             if (person.sex == true) {
                 mOrf = "male";
             } else {
                 mOrf = "female";
             }
-        <div>
-            <h5>Id : @person.id </h5>
-            <h5>Имя : @person.name </h5>
-            <h6>Пол : @mOrf </h6>
-        </div>
-            }
+            <div>
+                <h5>Id : @person.id </h5>
+                <h5>Имя : @person.name </h5>
+                <h6>Пол : @mOrf </h6>
+            </div>
+        }
     }
 </body>
 </html>
+@if (Model.PageViewModel.HasPreviousPage) {
+    <a asp-action="List"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn">
+       
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage) {
+    <a asp-action="List"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn" >
+        Вперед
+      
+    </a>
+}

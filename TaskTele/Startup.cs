@@ -43,13 +43,21 @@ namespace TaskTele
 
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            
+
             app.UseMvc(routes => {
-               
-                routes.MapRoute(name: "MaleFilter", template: "Persons/List/{sex?}/{x?}/{y?}", defaults: new { Controller = "Persons", action = "List" });
-               
+
+                routes.MapRoute(name: "MaleFilter", template: "Persons/List/{sex?}/{x?}/{y?}/{page?}",
+                    defaults: new { Controller = "Persons", action = "List" });
+
+
 
             });
+            //app.UseEndpoints(endpoints => {
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Persons}/{action=Index}/{id?}");
+            //});
+
 
             using (var scope = app.ApplicationServices.CreateScope()) {
                 AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
