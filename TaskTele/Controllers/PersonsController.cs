@@ -23,7 +23,7 @@ namespace TaskTele.Controllers
         }
 
         public async Task<IActionResult> List (string sex, string x, string y, int page = 1) {
-            int pageSize = 10;   // количество элементов на странице
+            int pageSize = 4;   // количество элементов на странице
 
 
             IEnumerable<Person> person = null;
@@ -33,27 +33,42 @@ namespace TaskTele.Controllers
             } else if (string.IsNullOrEmpty(sex)) { // проверка на значения пола работа с ViewResult
 
                 person = _person.Persons;
-
+                foreach (var age in person) {
+                    age.age = 0;
+                }
             } else {
+
                 switch (sex) {
                     case "male":
                         person = _person.Persons.Where(i => i.sex == true);
+                        foreach(var age in person) {
+                            age.age = 0;
+                        }
+
                         break;
                     case "female":
                         person = _person.Persons.Where(i => i.sex == false);
+
+                        foreach (var per in person) {
+                            per.age = 0;
+                        }
+
                         break;
                 }
 
                 if (!string.IsNullOrEmpty(x) & !string.IsNullOrEmpty(y)) {
                     //  try {
                     person = person.Where(i => (i.age > Convert.ToInt32(x)) && (i.age < Convert.ToInt32(y))).OrderBy(i => i.age).ToList();
+                    foreach (var per in person) {
+                        per.age = 0;
+                    }
                     //} catch(FormatException e) {
                     //    x = "0";
                     //    y = "100";
                     //    person = person.OrderBy(i => i.age);
                 }
 
-
+                
             }
 
             IQueryable<Person> source = person.AsQueryable();

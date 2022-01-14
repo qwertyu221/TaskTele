@@ -24,11 +24,15 @@
             } else {
                 mOrf = "female";
             }
-            <div>
-                <h5>Id : @person.id </h5>
-                <h5>Имя : @person.name </h5>
-                <h6>Пол : @mOrf </h6>
-            </div>
+           
+        <div>
+            <h5>Id : @person.id </h5>
+            <h5>Имя : @person.name </h5>
+            @if(person.age != 0) {
+            <h5>Возраст : @person.age</h5>
+            }
+            <h6>Пол : @mOrf </h6>
+        </div>
         }
     }
 </body>
